@@ -14,4 +14,5 @@ public interface CargoDao {
     Cargo findById(Long id);
 
     List<Cargo> findAll();
+
 }

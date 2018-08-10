@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.development.dao.FuncionarioDao;
+import br.com.development.domain.Cargo;
 import br.com.development.domain.Funcionario;
 
 @Service
@@ -41,6 +42,17 @@ public class FuncionarioServiceImpl implements FuncionarioService{
 	@Transactional(readOnly = true)
 	public List<Funcionario> buscarTodos() {
 		return funcionarioDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Funcionario> buscarPorNome(String nome) {
+		return funcionarioDao.findByName(nome);
+	}
+
+	@Override
+	public List<Funcionario> buscarCargoPorId(Long id) {
+		return funcionarioDao.findByCargoId(id);
 	}
 
 }

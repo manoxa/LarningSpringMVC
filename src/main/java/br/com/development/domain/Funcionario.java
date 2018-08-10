@@ -11,6 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "funcionarios")
@@ -19,14 +25,17 @@ public class Funcionario extends AbstractEntity<Long> {
 	@Column(nullable = false, unique = true)
 	private String nome;
 
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal salario;
 
+	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataEntrada;
 
+	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "data_saida", columnDefinition = "DATE")
-	private LocalDate datasaida;
+	private LocalDate dataSaida;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id_fk")
@@ -60,12 +69,12 @@ public class Funcionario extends AbstractEntity<Long> {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public LocalDate getDatasaida() {
-		return datasaida;
+	public LocalDate getDataSaida() {
+		return dataSaida;
 	}
 
-	public void setDatasaida(LocalDate datasaida) {
-		this.datasaida = datasaida;
+	public void setDataSaida(LocalDate dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 
 	public Endereco getEndereco() {

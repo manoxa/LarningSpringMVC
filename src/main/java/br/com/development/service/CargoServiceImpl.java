@@ -1,9 +1,11 @@
 package br.com.development.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import br.com.development.dao.CargoDao;
 import br.com.development.domain.Cargo;
 
@@ -13,7 +15,6 @@ public class CargoServiceImpl implements CargoService{
 	
 	@Autowired
 	private CargoDao cargoDao;
-	
 
 	@Override
 	public void salvar(Cargo cargo) {
@@ -41,5 +42,14 @@ public class CargoServiceImpl implements CargoService{
 	public List<Cargo> buscarTodos() {
 		return cargoDao.findAll();
 	}
+
+	@Override
+	public boolean cargoTemFuncionarios(Long id) {
+		if(buscarPorId(id).getFuncionarios().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
 
 }
